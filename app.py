@@ -1,5 +1,7 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 import requests
+import random
+import string
 
 app = Flask(__name__)
 
@@ -31,6 +33,31 @@ def cat():
         cat_url = None
 
     return render_template('cat.html', cat_url=cat_url)
+
+
+@app.route('/password-generator', methods=['GET', 'POST'])
+def password_generator():
+    if request.method == 'POST':
+        length = int(request.form.get('length'))
+        uppercase = 'uppercase' in request.form
+        lowercase = 'lowercase' in request.form
+        digits = 'digits' in request.form
+        special_chars = 'special_chars' in request.form
+
+        chars = ''
+        if uppercase:
+            chars += string.ascii_uppercase
+        if lowercase:
+            chars += string.ascii_lowercase
+        if digits:
+            chars += string.digits
+        if special_chars:
+            chars += string.punctuation
+
+        password = ''.join(random.choice(chars) for _ in range(length))
+        return render_template('password.html', password=password)
+    
+    return render_template('password_generator.html')
 
 if __name__ == '__main__':
     app.run()

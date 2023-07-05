@@ -1,10 +1,39 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Minha Página Inicial</title>
+    <title>Index</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            margin: 10px;
+            text-decoration: none;
+        }
+
+        .button:hover {
+            background-color: #555;
+        }
+    </style>
 </head>
 <body>
-    <h1>Bem-vindo à Minha Página Inicial</h1>
-    <p>Esta é uma página inicial simples em Flask.</p>
+    <h1>Index</h1>
+    <a href="/cryptos" class="button">Cryptos</a>
+    <a href="/cat" class="button">Cat</a>
+    <a href="/password-generator" class="button">Password Generator</a>
 </body>
 </html>
