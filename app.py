@@ -59,5 +59,9 @@ def password_generator():
     
     return render_template('password_generator.html')
 
+@app.route('/bees')
+def bees():
+    return render_template('bees.html')
+
 if __name__ == '__main__':
     app.run()

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Abelha Móvel</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        #bee {
+            position: absolute;
+            width: 50px; /* Ajuste o tamanho da imagem */
+            height: 50px;
+            transition: transform 0.7s ease-in-out; /* Adicione uma transição suave */
+        }
+    </style>
+    <script>
+        window.addEventListener('DOMContentLoaded', function() {
+            var bee = document.getElementById('bee');
+            var maxX = window.innerWidth - bee.width;
+            var maxY = window.innerHeight - bee.height;
+
+            function moveBee() {
+                var x = Math.floor(Math.random() * maxX);
+                var y = Math.floor(Math.random() * maxY);
+
+                bee.style.transform = 'translate(' + x + 'px, ' + y + 'px)'; /* Usando transform para movimentos suaves */
+            }
+
+            setInterval(moveBee, 900); // Move a abelha a cada 1 segundo
+        });
+    </script>
+</head>
+<body>
+    <img id="bee" src="{{ url_for('static', filename='bee.png') }}" alt="Abelha">
+</body>
+</html>
