@@ -68,7 +68,7 @@ def game():
     return render_template('space.html')
 
 @app.route('/name')
-def game():
+def names():
     return render_template('names.html')
 
 if __name__ == '__main__':
