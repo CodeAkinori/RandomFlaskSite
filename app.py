@@ -67,5 +67,9 @@ def bees():
 def game():
     return render_template('space.html')
 
+@app.route('/name')
+def game():
+    return render_template('names.html')
+
 if __name__ == '__main__':
     app.run()
