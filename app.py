@@ -2,6 +2,7 @@ from flask import Flask, render_template, request
 import requests
 import random
 import string
+import matplotlib.pyplot as plt
 
 app = Flask(__name__)
 
@@ -70,6 +71,26 @@ def game():
 @app.route('/name')
 def names():
     return render_template('names.html')
+
+@app.route('/cotacoes')
+def get_cotacoes():
+    # Obtenha as cotações da API
+    url = 'https://api.exchangeratesapi.io/latest'
+    response = requests.get(url)
+    data = response.json()
+
+    # Processar os dados e criar o gráfico de pizza
+    moedas = ['USD', 'EUR', 'JPY']  # Escolha as moedas que deseja exibir no gráfico
+    cotacoes = [data['rates'][moeda] for moeda in moedas]
+
+    # Criar o gráfico de pizza
+    plt.figure(figsize=(8, 8))
+    plt.pie(cotacoes, labels=moedas, autopct='%1.1f%%', startangle=140)
+    plt.axis('equal')
+    plt.title('Cotações das Moedas')
+    plt.savefig('static/grafico_pizza.png')  # Salvar o gráfico como uma imagem estática
+
+    return render_template('cotacoes.html')
 
 if __name__ == '__main__':
     app.run()

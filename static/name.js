@@ -138,7 +138,7 @@ const names = [
   
   function generateName() {
     const generatedName = document.getElementById("generated-name");
-    const randomIndex = Math.floor(Math.random() * names.length);
+    const randomIndex = Math.floor(Math.random() * names.length); 
     const randomName = names[randomIndex];
     generatedName.textContent = randomName;
   }
