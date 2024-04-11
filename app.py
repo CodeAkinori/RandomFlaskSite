@@ -6,14 +6,17 @@ import matplotlib.pyplot as plt
 
 app = Flask(__name__)
 
+
 @app.route('/')
 def home():
     return render_template('index.html')
 
+
 @app.route('/cryptos')
 def cryptos():
     # Fazendo uma solicitação GET para a API CoinGecko para obter os valores das criptomoedas
-    response = requests.get('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=usd')
+    response = requests.get(
+        'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=usd')
     if response.status_code == 200:
         data = response.json()
         bitcoin_price = data['bitcoin']['usd']
@@ -23,6 +26,7 @@ def cryptos():
         ethereum_price = None
 
     return render_template('cryptos.html', bitcoin_price=bitcoin_price, ethereum_price=ethereum_price)
+
 
 @app.route('/cat')
 def cat():
@@ -57,20 +61,24 @@ def password_generator():
 
         password = ''.join(random.choice(chars) for _ in range(length))
         return render_template('password.html', password=password)
-    
+
     return render_template('password_generator.html')
+
 
 @app.route('/bees')
 def bees():
     return render_template('bees.html')
 
+
 @app.route('/game')
 def game():
     return render_template('space.html')
 
+
 @app.route('/name')
 def names():
     return render_template('names.html')
+
 
 @app.route('/cotacoes')
 def get_cotacoes():
@@ -80,7 +88,8 @@ def get_cotacoes():
     data = response.json()
 
     # Processar os dados e criar o gráfico de pizza
-    moedas = ['USD', 'EUR', 'JPY']  # Escolha as moedas que deseja exibir no gráfico
+    # Escolha as moedas que deseja exibir no gráfico
+    moedas = ['USD', 'EUR', 'JPY']
     cotacoes = [data['rates'][moeda] for moeda in moedas]
 
     # Criar o gráfico de pizza
@@ -88,9 +97,29 @@ def get_cotacoes():
     plt.pie(cotacoes, labels=moedas, autopct='%1.1f%%', startangle=140)
     plt.axis('equal')
     plt.title('Cotações das Moedas')
-    plt.savefig('static/grafico_pizza.png')  # Salvar o gráfico como uma imagem estática
+    # Salvar o gráfico como uma imagem estática
+    plt.savefig('static/grafico_pizza.png')
 
     return render_template('cotacoes.html')
+
+
+@app.route('/username')
+def get_username():
+    # Retornar nome do user
+    username = str(input('Por favor, digite seu nome: '))
+    return username
+
+
+def welcome_message(username):
+    # mensagem de boas vindas ao user
+    print(f'Olá, {username} Bem-vindo!')
+
+
+def main():
+    # executa o programa
+    username = get_username()
+    welcome_message(username)
+
 
 if __name__ == '__main__':
     app.run()
