@@ -1,3 +1,4 @@
+
 # My Website
 
 This is a collaborative project where anyone can contribute and add their own pages to showcase their creativity and ideas. The website is built with Flask and provides a platform for users to share various content and functionalities.
