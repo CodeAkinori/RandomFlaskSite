@@ -116,7 +116,7 @@ def welcome_message(username):
 
 
 def main():
-    # executa o programa
+    # executar o programa
     username = get_username()
     welcome_message(username)
 
